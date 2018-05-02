@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"../eventcenter"
+	event "routine/eventcenter"
 )
 
 func console(interface{}) {
@@ -10,8 +10,8 @@ func console(interface{}) {
 }
 
 func main() {
-	
-	event := eventcenter.EventCenter{List: make(map[string]func(interface{}))}
+
+	event := event.EventCenter{List: make(map[string]func(interface{}))}
 	event.Add("console", console)
 	event.Fire("console")
 }

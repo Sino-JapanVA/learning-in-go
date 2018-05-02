@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"strings"
@@ -9,7 +10,8 @@ import (
 
 func main() {
 	http.HandleFunc("/", sayhelloName)
-	err := http.ListenAndServe(":1314", nil)
+	http.HandleFunc("/login", login)
+	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
@@ -18,7 +20,6 @@ func main() {
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	fmt.Println("-------------------------Request Start----------------------------------")
-	fmt.Println(r.Form)
 	fmt.Println("path", r.URL.Path)
 	fmt.Println("schema", r.URL.Scheme)
 	fmt.Println(r.Form["url_long"])
@@ -29,4 +30,16 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello astaxie!")
 	fmt.Println(r.URL)
 	fmt.Println("-------------------------Request End------------------------------------")
+}
+
+func login(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Req method: ", r.Method)
+	r.ParseForm()
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("login.html")
+		t.Execute(w, nil)
+	} else {
+		fmt.Println("username:", r.Form["username"])
+		fmt.Println("password:", r.Form["password"])
+	}
 }
