@@ -9,6 +9,8 @@ import (
 
 func main() {
 	db, err := sql.Open("mysql", "root:Sunshine@/test?charset=utf8")
+	defer db.Close()
+
 	checkErr(err)
 
 	stmt, err := db.Prepare("INSERT userinfo SET username=?,department=?,created=?")
@@ -41,6 +43,7 @@ func main() {
 		fmt.Println(department)
 		fmt.Println(created)
 	}
+	defer stmt.Close()
 }
 
 func checkErr(err error) {
