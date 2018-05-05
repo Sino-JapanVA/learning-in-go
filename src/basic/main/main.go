@@ -3,15 +3,16 @@ package main
 import (
 	"fmt"
 	"io"
-	"strings"
 )
 
 func main() {
-	p, err := ReadFrom(strings.NewReader("Treasure"), 5)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(p)
+	str := "Sunshine夏青"
+	fmt.Println(len(str))
+	fmt.Println(len([]byte(str)))
+	slice := []rune(str)
+	slice[len(slice)-1] = '日'
+	fmt.Println(len([]rune(str)))
+	fmt.Println(slice)
 }
 
 func ReadFrom(reader io.Reader, num int) ([]byte, error) {
