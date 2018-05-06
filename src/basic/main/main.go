@@ -1,25 +1,23 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
-	"io"
+	"io/ioutil"
 )
 
 func main() {
-	str := "Sunshine夏青"
-	fmt.Println(len(str))
-	fmt.Println(len([]byte(str)))
-	slice := []rune(str)
-	slice[len(slice)-1] = '日'
-	fmt.Println(len([]rune(str)))
-	fmt.Println(slice)
+	lrc, err := ioutil.ReadFile("../告白气球.txt")
+	// txt := string(lrc)
+	runeData := bytes.Runes(lrc)
+	// runeTxt := string(runeData)
+	checkErr(err)
+	fmt.Println(len(lrc))
+	fmt.Println(len(runeData))
 }
 
-func ReadFrom(reader io.Reader, num int) ([]byte, error) {
-	p := make([]byte, num)
-	n, err := reader.Read(p)
-	if n > 0 {
-		return p[:n], nil
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
 	}
-	return p, err
 }
