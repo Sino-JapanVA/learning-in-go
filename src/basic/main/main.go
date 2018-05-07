@@ -1,28 +1,20 @@
 package main
 
 import (
+	"container/list"
 	"fmt"
-	"strings"
 )
 
+type User struct {
+	Name string
+	Age  int8
+}
+
 func main() {
-	// lrc, err := ioutil.ReadFile("../告白气球.txt")
-	// // txt := string(lrc)
-	// runeData := bytes.Runes(lrc)
-	// // runeTxt := string(runeData)
-	// checkErr(err)
-	// fmt.Println(len(lrc))
-	// fmt.Println(len(runeData))
-	lrc := "ss超凡蜘蛛侠"
-	lrcRune := []rune(lrc)
-	txt := "蜘"
-	txtRune := []rune(txt)
-	n := strings.IndexRune(lrc, txtRune[0])
-	fmt.Println(n)
-	for index, val := range lrcRune {
-		fmt.Printf("%v  %d\n", string(val), index)
-	}
-	fmt.Println(string(lrcRune[4]))
+	list := list.New()
+	list.PushBack(User{"Treasure", 20})
+	ele := list.Front()
+	fmt.Println(ele.Value)
 }
 
 func checkErr(err error) {
