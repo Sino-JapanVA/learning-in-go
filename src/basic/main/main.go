@@ -1,8 +1,8 @@
 package main
 
 import (
-	"container/list"
 	"fmt"
+	"time"
 )
 
 type User struct {
@@ -11,10 +11,8 @@ type User struct {
 }
 
 func main() {
-	list := list.New()
-	list.PushBack(User{"Treasure", 20})
-	ele := list.Front()
-	fmt.Println(ele.Value)
+	time := time.Unix()
+	fmt.Println(time)
 }
 
 func checkErr(err error) {
