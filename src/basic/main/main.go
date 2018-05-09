@@ -30,6 +30,7 @@ func main() {
 	fmt.Println(string(txt))
 	data := []byte(string(txt))
 	fmt.Println(data)
+	fmt.Println(time)
 }
 
 func checkErr(err error) {
