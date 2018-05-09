@@ -1,20 +1,35 @@
 package main
 
 import (
-	"container/list"
 	"fmt"
+	"io/ioutil"
+
+	"github.com/json-iterator/go"
 )
 
 type User struct {
-	Name string
-	Age  int8
+	Name     string `json:"name"`
+	Age      int8   `json:"age"`
+	Favorite []Book
+}
+
+type Book struct {
+	Name string `json:"name"`
+	Type string `json:"type"`
 }
 
 func main() {
-	list := list.New()
-	list.PushBack(User{"Treasure", 20})
-	ele := list.Front()
-	fmt.Println(ele.Value)
+	jsonBytes, err := ioutil.ReadFile("../test.json")
+	checkErr(err)
+	// jsonText := string(jsonBytes)
+	var user User
+	err = jsoniter.Unmarshal(jsonBytes, &user)
+	checkErr(err)
+	fmt.Println(user.Favorite)
+	txt, err := jsoniter.Marshal(user)
+	fmt.Println(string(txt))
+	data := []byte(string(txt))
+	fmt.Println(data)
 }
 
 func checkErr(err error) {
