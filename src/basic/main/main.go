@@ -7,12 +7,14 @@ import (
 	"github.com/json-iterator/go"
 )
 
+// User 用户
 type User struct {
 	Name     string `json:"name"`
 	Age      int8   `json:"age"`
 	Favorite []Book
 }
 
+// Book 书籍
 type Book struct {
 	Name string `json:"name"`
 	Type string `json:"type"`
@@ -30,7 +32,6 @@ func main() {
 	fmt.Println(string(txt))
 	data := []byte(string(txt))
 	fmt.Println(data)
-	fmt.Println(time)
 }
 
 func checkErr(err error) {
