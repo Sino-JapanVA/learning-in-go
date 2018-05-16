@@ -3,18 +3,18 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strings"
+
+	"github.com/astaxie/beego/httplib"
 )
 
 func main() {
-	http.HandleFunc("/", sayhelloName)
-	http.HandleFunc("/login", login)
-	err := http.ListenAndServe(":9090", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	req := httplib.Get("http://www.baidu.com")
+
+	str, err := req.String()
+	checkErr(err)
+	fmt.Printf(str)
 }
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
@@ -41,5 +41,11 @@ func login(w http.ResponseWriter, r *http.Request) {
 	} else {
 		fmt.Println("username:", r.Form["username"])
 		fmt.Println("password:", r.Form["password"])
+	}
+}
+
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
 	}
 }
