@@ -2,9 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-
-	"github.com/json-iterator/go"
 )
 
 // User 用户
@@ -21,21 +18,27 @@ type Book struct {
 }
 
 func main() {
-	jsonBytes, err := ioutil.ReadFile("../test.json")
-	checkErr(err)
-	// jsonText := string(jsonBytes)
-	var user User
-	err = jsoniter.Unmarshal(jsonBytes, &user)
-	checkErr(err)
-	fmt.Println(user.Favorite)
-	txt, err := jsoniter.Marshal(user)
-	fmt.Println(string(txt))
-	data := []byte(string(txt))
-	fmt.Println(data)
+	// jsonBytes, err := ioutil.ReadFile("../test.json")
+	// checkErr(err)
+	// // jsonText := string(jsonBytes)
+	// var user User
+	// err = jsoniter.Unmarshal(jsonBytes, &user)
+	// checkErr(err)
+	// fmt.Println(user.Favorite)
+	// txt, err := jsoniter.Marshal(user)
+	// fmt.Println(string(txt))
+	// data := []byte(string(txt))
+	// fmt.Println(data)
+	back()
+	fmt.Println("after func")
 }
 
 func checkErr(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func back() bool {
+	return true
 }
