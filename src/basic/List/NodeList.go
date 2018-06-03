@@ -47,18 +47,34 @@ func (this *NodeList) RemoveAll() {
 	this.fence = nil
 }
 
-func (this *NodeList) Print() {
+func (this *NodeList) Remove(ele int) bool {
 	current := this.head
-	for current.next != nil {
-		fmt.Println("Value:" + strconv.Itoa(current.Val))
+	var prev, next *Node
+	for current.Val != ele {
 		current = current.next
+	}
+	if current != nil {
+		prev = current.prev
+		next = current.next
+		prev.next = next
+		next.prev = prev
+		return true
+	} else {
+		return false
 	}
 }
 
+func (this *NodeList) Print() {
+	current := this.head
+	for current.next != nil {
+		fmt.Print(strconv.Itoa(current.Val) + " ")
+		current = current.next
+	}
+	fmt.Println()
+}
+
 func (this *NodeList) GetVal(ele *int) bool {
-	fmt.Println(ele)
 	*ele = this.fence.Val
-	fmt.Println(*ele)
 	return true
 }
 
@@ -73,4 +89,18 @@ func (this *NodeList) Find(ele **Node, Val int) bool {
 		current = current.next
 	}
 	return false
+}
+
+func (this *NodeList) Insert(val int) {
+	current := this.head
+	var prev *Node
+	for val > current.Val {
+		current = current.next
+	}
+	ele := &Node{val, nil, nil}
+	prev = current.prev
+	prev.next = ele
+	ele.next = current
+	current.prev = ele
+	ele.prev = prev
 }
