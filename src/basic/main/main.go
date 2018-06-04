@@ -7,7 +7,17 @@ import (
 )
 
 func main() {
+	mapA := make(map[string]int)
+	fmt.Println(mapA["val"])
+}
 
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+func funcList() {
 	list := List.NewArrayList(20)
 	for i := 0; i < 10; i++ {
 		list.Append(rand.Intn(10))
@@ -45,11 +55,4 @@ func main() {
 	nodeList.Insert(5)
 	nodeList.Insert(5)
 	nodeList.Print()
-
-}
-
-func checkErr(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
