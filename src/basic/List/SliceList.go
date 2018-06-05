@@ -1,15 +1,21 @@
 package List
 
+import (
+	"fmt"
+	"strconv"
+)
+
 type SliceList struct {
 	slice []int
 }
 
-func NewSliceList(size int) *SliceList {
-	return &SliceList{make([]int, size)}
+func NewSliceList() *SliceList {
+	list := []int{}
+	return &SliceList{list}
 }
 
 func (this *SliceList) Clear() {
-	this.slice = make([]int, 10)
+	this.slice = []int{}
 }
 
 func (this *SliceList) Append(ele int) {
@@ -27,11 +33,17 @@ func (this *SliceList) Remove(ele *int, index int) bool {
 		return false
 	} else {
 		*ele = this.slice[index]
-		this.slice = append(this.slice[:index], this.slice[index+1])
+		this.slice = append(this.slice[:index], this.slice[index+1:]...)
 		return true
 	}
 }
 
 func (this *SliceList) GetValue(index int) int {
 	return this.slice[index]
+}
+
+func (this *SliceList) Print() {
+	for index, val := range this.slice {
+		fmt.Println("index:" + strconv.Itoa(index) + " " + "val:" + strconv.Itoa(val))
+	}
 }

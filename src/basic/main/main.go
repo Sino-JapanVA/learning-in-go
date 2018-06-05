@@ -8,17 +8,7 @@ import (
 )
 
 func main() {
-	stack := Stack.NewStack(10)
-	stack.Push(0)
-	stack.Push(1)
-	stack.Push(2)
-	stack.Push(3)
-	val1 := stack.GetValue()
-	fmt.Println(val1)
-	var ele int
-	stack.Pop(&ele)
-	val2 := stack.GetValue()
-	fmt.Println(ele, val2)
+	funcStack()
 }
 
 func checkErr(err error) {
@@ -65,4 +55,35 @@ func funcList() {
 	nodeList.Insert(5)
 	nodeList.Insert(5)
 	nodeList.Print()
+}
+
+func funcStack() {
+	stack := Stack.NewStack(10)
+	stack.Push(0)
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
+	val1 := stack.GetValue()
+	fmt.Println(val1)
+
+	stack.Print()
+
+	var ele int
+	stack.Pop(&ele)
+	val2 := stack.GetValue()
+	fmt.Println(ele, val2)
+	stack.Print()
+}
+
+func funcSliceList() {
+	sliceList := List.NewSliceList()
+	sliceList.Append(1)
+	sliceList.Append(2)
+	sliceList.Append(3)
+
+	sliceList.Insert(4, 2)
+	var ele int
+	sliceList.Remove(&ele, 0)
+
+	sliceList.Print()
 }

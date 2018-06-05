@@ -11,7 +11,7 @@ type Stack struct {
 }
 
 func NewStack(size int) *Stack {
-	list := List.NewSliceList(size)
+	list := List.NewSliceList()
 	return &Stack{size, 0, list}
 }
 
@@ -26,7 +26,7 @@ func (this *Stack) Push(ele int) {
 }
 
 func (this *Stack) Pop(ele *int) bool {
-	if ok := this.list.Remove(ele, this.top); ok {
+	if ok := this.list.Remove(ele, this.top-1); ok {
 		this.top--
 		return true
 	} else {
@@ -35,5 +35,9 @@ func (this *Stack) Pop(ele *int) bool {
 }
 
 func (this *Stack) GetValue() int {
-	return this.list.GetValue(this.top)
+	return this.list.GetValue(this.top - 1)
+}
+
+func (this *Stack) Print() {
+	this.list.Print()
 }
