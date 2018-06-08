@@ -1,14 +1,16 @@
 package main
 
 import (
+	"strings"
 	"basic/List"
 	"basic/Stack"
 	"fmt"
 	"math/rand"
+	"strconv"
 )
 
 func main() {
-	funcStack()
+
 }
 
 func checkErr(err error) {
@@ -86,4 +88,76 @@ func funcSliceList() {
 	sliceList.Remove(&ele, 0)
 
 	sliceList.Print()
+}
+
+// 逆波兰算法相关
+func postFix() {
+	nums := []string{"9", "3", "1", "-", "3", "*", "+", "10", "2", "/", "+"}
+	stack := Stack.NewStack(20)
+
+	for _, val := range nums {
+		if isOperation(val) {
+			var prev, next int
+			stack.Pop(&next)
+			stack.Pop(&prev)
+			result := operation(prev, next, val)
+			stack.Push(result)
+		} else {
+			num, _ := strconv.Atoi(val)
+			stack.Push(num)
+		}
+	}
+	fmt.Println(stack.GetValue())
+}
+func pre2Post() *[]string {
+	slice := strings.Split("")
+	stack := Stack.NewStack(20)
+	var slice2 []string
+	for _, val := range slice {
+		if isOperation(val) {
+			if (val != ")") {
+				now := stack.GetValue()
+				if now == "+" || now == "-" {
+					stack.Push(val)
+				} else {
+					var popEle int
+					stack.Pop(&popEle)
+					slice2 = append(slice2, popEle)
+				}
+
+			} else {
+				for ele := stack.Pop(&ele); ele != "(" {
+					slice2 = append(slice2, ele)
+				}
+			}
+		} else {
+			slice2 = append(slice2, val)
+		}
+	}
+}
+
+func operation(a, b int, opt string) int {
+	switch opt {
+	case "-":
+		return a - b
+	case "+":
+		return a + b
+	case "*":
+		return a * b
+	case "/":
+		return a / b
+	default:
+		panic("wrong operation")
+
+	}
+}
+
+func isOperation(str string) bool {
+	slice := []string{"+", "-", "*", "/", "(", ")"}
+	for _, val := range slice {
+		if val == str {
+			return true
+		}
+	}
+	return false
 }

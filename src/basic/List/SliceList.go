@@ -24,7 +24,7 @@ func (this *SliceList) Append(ele int) {
 
 func (this *SliceList) Insert(ele int, index int) {
 	rest := append([]int{}, this.slice[index:]...)
-	this.slice = append(this.slice[0:index], ele)
+	this.slice = append(this.slice[:index], ele)
 	this.slice = append(this.slice, rest...)
 }
 
